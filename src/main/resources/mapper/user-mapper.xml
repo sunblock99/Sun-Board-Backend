@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.sunboard.mapper.UserMapper">
+
+
+    <select id="checkDuplicatedId" resultType="int">
+        SELECT COUNT(1)
+        FROM User
+        WHERE id = #{id}
+    </select>
+
+    <insert id="createUser" parameterType="UserDTO">
+        INSERT INTO USER(id, password, NAME, BIRTHDAY, JOIN_DATE, LAST_LOGIN_DATE, STATUS, SIGNUP_TYPE)
+        VALUES(#{id}, #{password}, #{name}, #{birthday},now(),null,'1','0')
+    </insert>
+
+</mapper>
