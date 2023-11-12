@@ -27,5 +27,10 @@ public class UserService {
         return userMapper.checkDuplicatedId(id) == 1;
 
     }
+
+    public UserDTO login(UserDTO user) {
+        user.setPassword(SHA256Util.encryptSHA256(user.getPassword()));
+        return userMapper.findByUserId(user);
+    }
 }
 
