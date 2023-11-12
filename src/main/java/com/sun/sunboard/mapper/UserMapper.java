@@ -10,4 +10,5 @@ public interface UserMapper {
 
     public void createUser(UserDTO user);
 
+    UserDTO findByUserId(UserDTO user);
 }

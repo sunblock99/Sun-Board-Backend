@@ -3,6 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sun.sunboard.mapper.UserMapper">
 
+    <resultMap id="userResultMap" type="UserDTO">
+        <id property="userNo" column="USER_NO"/>
+        <result property="id" column="ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="name" column="name"/>
+        <result property="PASSWORD" column="PASSWORD"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="joinDate" column="JOIN_DATE"/>
+        <result property="lastLoginDate" column="LAST_LOGIN_DATE"/>
+        <result property="status" column="STATUS"/>
+        <result property="signupType" column="SIGNUP_TYPE"/>
+    </resultMap>
+
+    <select id="findByUserId" resultType="UserDTO">
+        SELECT *
+        FROM User
+        WHERE
+        status = 1 AND
+        id = #{id} AND password = #{password}
+    </select>
+
 
     <select id="checkDuplicatedId" resultType="int">
         SELECT COUNT(1)
