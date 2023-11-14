@@ -2,6 +2,7 @@ package com.sun.sunboard.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 
@@ -19,6 +20,7 @@ public class UserDTO {
     /**
      * 아이디
      */
+    @NotNull(message = "아이디는 필수입니다.")
     private String id;
     /**
      * 비밀번호

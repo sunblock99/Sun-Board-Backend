@@ -31,9 +31,22 @@
         WHERE id = #{id}
     </select>
 
+    <select id="checkDuplicatedIdPwd" resultType="int">
+        SELECT COUNT(1)
+        FROM User
+        id = #{id} AND password = #{password}
+    </select>
+
     <insert id="createUser" parameterType="UserDTO">
         INSERT INTO USER(id, password, NAME, BIRTHDAY, JOIN_DATE, LAST_LOGIN_DATE, STATUS, SIGNUP_TYPE)
         VALUES(#{id}, #{password}, #{name}, #{birthday},now(),null,'1','0')
     </insert>
+
+
+    <update id="updatePassword">
+        UPDATE USER
+        SET PASSWORD = #{password}
+        WHERE id = #{id}
+    </update>
 
 </mapper>
