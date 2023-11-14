@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/users/")
@@ -22,7 +23,7 @@ public class UserController {
      * 회원 가입
      *
      * @param user 유저 정보
-     * @return 회원 가입이 성공한 경우 HTTP 200 Created 상태코드와 함께 응답
+     * @return 회원 가입이 성공한 경우 HTTP 201 Created 상태코드와 함께 응답
      */
     @PostMapping("signup")
     public ResponseEntity<Void> signUp(@Validated @RequestBody UserDTO user) {
@@ -45,7 +46,7 @@ public class UserController {
             // ID or Password 실패시
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }else if(loginUser != null){
-            SessionUtil.setLoginUserId(session, loginUser.getUserNo());
+            SessionUtil.setLoginUserId(session, loginUser.getId());
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             throw new RuntimeException("Runtime Error ! !");
@@ -63,6 +64,29 @@ public class UserController {
     public void logout(HttpSession session){
         SessionUtil.logoutUser(session);
     }
+
+    /**
+     * 비밀번호 변경
+     *
+     * @param session 세션 정보
+     * @param oldPassword 현재 비밀번호
+     * @param newPassword 바꿀 비밀번호
+     * @return 변경이 성공한 경우 HTTP 200 Created 상태코드와 함께 응답
+     */
+    @PutMapping("password")
+    public ResponseEntity<Void> updateUser(@RequestBody String oldPassword, @RequestBody String newPassword, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(oldPassword == null || newPassword == null) {
+            throw new NullPointerException("패스워드를 입력해주세요.");
+        }else if(userId == null || userId.isEmpty()){
+            throw new NullPointerException("세션이 만료되었습니다.");
+        }else{
+            userService.passwordChange(userId, oldPassword, newPassword);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
 
 }
