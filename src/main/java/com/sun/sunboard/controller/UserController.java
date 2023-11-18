@@ -2,6 +2,7 @@ package com.sun.sunboard.controller;
 
 import com.sun.sunboard.common.SessionUtil;
 import com.sun.sunboard.dto.UserDTO;
+import com.sun.sunboard.error.exception.NullSessionException;
 import com.sun.sunboard.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -79,7 +80,7 @@ public class UserController {
         if(oldPassword == null || newPassword == null) {
             throw new NullPointerException("패스워드를 입력해주세요.");
         }else if(userId == null || userId.isEmpty()){
-            throw new NullPointerException("세션이 만료되었습니다.");
+            throw new NullSessionException("세션이 만료되었습니다.");
         }else{
             userService.passwordChange(userId, oldPassword, newPassword);
         }
