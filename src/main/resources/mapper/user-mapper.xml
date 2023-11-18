@@ -24,6 +24,13 @@
         id = #{id} AND password = #{password}
     </select>
 
+    <select id="findByUserNo" resultType="int">
+        SELECT USER_NO
+        FROM User
+        WHERE
+        status = 1 AND
+        id = #{id}
+    </select>
 
     <select id="checkDuplicatedId" resultType="int">
         SELECT COUNT(1)

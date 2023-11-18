@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.sunboard.mapper.BoardMapper">
+
+<insert id="insertPost" parameterType="BoardDTO">
+    INSERT INTO post
+    (
+    `USER_NO`,
+    `TITLE`,
+    `CONTENT`,
+    `UPLOAD_DATE`,
+    `HASHTAG`,
+    `MODIFIED_DATE`,
+    `STATUS`,
+    `HIT`)
+    VALUES
+    (
+    #{userNo},
+    #{title},
+    #{content},
+    now(),
+    #{hashtag},
+    null,
+    '1',
+    '0')
+</insert>
+
+</mapper>
