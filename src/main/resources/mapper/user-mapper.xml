@@ -41,7 +41,7 @@
     <select id="checkDuplicatedIdPwd" resultType="int">
         SELECT COUNT(1)
         FROM User
-        id = #{id} AND password = #{password}
+        WHERE id = #{id} AND password = #{password}
     </select>
 
     <insert id="createUser" parameterType="UserDTO">
