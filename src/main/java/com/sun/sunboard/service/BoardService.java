@@ -17,4 +17,8 @@ public class BoardService {
         boardDTO.setUserNo(userNo);
         boardMapper.insertPost(boardDTO);
     }
+
+    public void removePost(BoardDTO boardDTO) {
+        boardMapper.deletePost(boardDTO.getPostId());
+    }
 }
