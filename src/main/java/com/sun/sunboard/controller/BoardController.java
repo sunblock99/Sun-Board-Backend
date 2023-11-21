@@ -2,6 +2,7 @@ package com.sun.sunboard.controller;
 
 import com.sun.sunboard.common.SessionUtil;
 import com.sun.sunboard.dto.BoardDTO;
+import com.sun.sunboard.dto.PageDTO;
 import com.sun.sunboard.error.exception.NullSessionException;
 import com.sun.sunboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/board/")
@@ -73,6 +75,18 @@ public class BoardController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     * 게시글 목록 조회
+     *
+     * @return HTTP 200 상태코드와 함께 목록 응답
+     */
+    @GetMapping
+    public ResponseEntity<List<BoardDTO>> list(@ModelAttribute PageDTO pageDTO) {
+        List<BoardDTO> boardList = boardService.getBoardList(pageDTO);
+
+        return ResponseEntity.ok(boardList);
     }
 
 

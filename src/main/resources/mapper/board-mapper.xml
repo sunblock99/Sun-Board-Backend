@@ -37,6 +37,19 @@
         WHERE POST_ID = #{postId}
     </update>
 
-
+    <select id="getBoardList" resultType="BoardDTO">
+        SELECT
+            Post_ID as postId,
+            USER_NO as userNo,
+            TITLE as title,
+            CONTENT as content,
+            UPLOAD_DATE as uploadDate,
+            HASHTAG as hashtag,
+            MODIFIED_DATE as modifiedDate,
+            STATUS as status,
+            HIT as hit
+        FROM sunboard.POST
+        WHERE STATUS = 1
+    </select>
 
 </mapper>
