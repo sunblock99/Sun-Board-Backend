@@ -8,4 +8,6 @@ public interface BoardMapper {
     void insertPost(BoardDTO boardDTO);
 
     void deletePost(int postId);
+
+    void updatePost(BoardDTO boardDTO);
 }

@@ -26,10 +26,17 @@
         '0')
     </insert>
 
-
     <delete id="deletePost" parameterType="int">
         DELETE FROM POST
         WHERE POST_ID = #{postId}
     </delete>
+
+    <update id="updatePost" parameterType="BoardDTO">
+        UPDATE POST
+        SET TITLE = #{title}, CONTENT = #{content}, HASHTAG = #{hashtag}, MODIFIED_DATE = now()
+        WHERE POST_ID = #{postId}
+    </update>
+
+
 
 </mapper>

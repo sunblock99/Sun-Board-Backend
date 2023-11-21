@@ -21,4 +21,8 @@ public class BoardService {
     public void removePost(BoardDTO boardDTO) {
         boardMapper.deletePost(boardDTO.getPostId());
     }
+
+    public void modifyPost(BoardDTO boardDTO) {
+        boardMapper.updatePost(boardDTO);
+    }
 }

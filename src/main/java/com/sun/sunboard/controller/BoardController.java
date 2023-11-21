@@ -56,5 +56,24 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     * 게시글 수정
+     *
+     * @param session 세션 정보
+     * @param boardDTO 게시글
+     * @return 수정 성공한 경우 HTTP 200 상태코드와 함께 응답
+     */
+    @PutMapping("modify")
+    public ResponseEntity<Void> modify(@RequestBody BoardDTO boardDTO, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(userId == null || userId.isEmpty()){
+            throw new NullSessionException("세션이 만료되었습니다.");
+        }else{
+            boardService.modifyPost(boardDTO);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
 }
