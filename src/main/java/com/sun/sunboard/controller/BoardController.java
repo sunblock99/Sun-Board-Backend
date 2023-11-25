@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/board/")
+@RequestMapping("/api/board")
 @RequiredArgsConstructor
 public class BoardController {
 
@@ -27,7 +27,7 @@ public class BoardController {
      * @param boardDTO 게시글
      * @return 생성 성공한 경우 HTTP 200 Created 상태코드와 함께 응답
      */
-    @PostMapping("write")
+    @PostMapping("/write")
     public ResponseEntity<Void> write(@RequestBody BoardDTO boardDTO, HttpSession session) {
         String userId = SessionUtil.getLoginUserId(session);
         if(userId == null || userId.isEmpty()){
@@ -46,7 +46,7 @@ public class BoardController {
      * @param boardDTO 게시글
      * @return 삭제 성공한 경우 HTTP 200 상태코드와 함께 응답
      */
-    @DeleteMapping("remove")
+    @DeleteMapping("/remove")
     public ResponseEntity<Void> remove(@RequestBody BoardDTO boardDTO, HttpSession session) {
         String userId = SessionUtil.getLoginUserId(session);
         if(userId == null || userId.isEmpty()){
@@ -65,7 +65,7 @@ public class BoardController {
      * @param boardDTO 게시글
      * @return 수정 성공한 경우 HTTP 200 상태코드와 함께 응답
      */
-    @PutMapping("modify")
+    @PutMapping("/modify")
     public ResponseEntity<Void> modify(@RequestBody BoardDTO boardDTO, HttpSession session) {
         String userId = SessionUtil.getLoginUserId(session);
         if(userId == null || userId.isEmpty()){
@@ -82,11 +82,23 @@ public class BoardController {
      *
      * @return HTTP 200 상태코드와 함께 목록 응답
      */
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<BoardDTO>> list(@ModelAttribute PageDTO pageDTO) {
         List<BoardDTO> boardList = boardService.getBoardList(pageDTO);
 
         return ResponseEntity.ok(boardList);
+    }
+
+    /**
+     * 게시글 상세 목록 조회
+     *
+     * @return HTTP 200 상태코드와 함께 게시글 응답
+     */
+    @GetMapping("/{postId}")
+    public ResponseEntity<BoardDTO> detail(@PathVariable("postId") int postId) {
+        BoardDTO board = boardService.getBoard(postId);
+
+        return ResponseEntity.ok(board);
     }
 
 

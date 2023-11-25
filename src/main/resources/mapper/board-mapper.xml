@@ -48,8 +48,24 @@
             MODIFIED_DATE as modifiedDate,
             STATUS as status,
             HIT as hit
-        FROM sunboard.POST
+        FROM POST
         WHERE STATUS = 1
+    </select>
+
+    <select id="seletePost" resultType="BoardDTO">
+        SELECT
+        Post_ID as postId,
+        USER_NO as userNo,
+        TITLE as title,
+        CONTENT as content,
+        UPLOAD_DATE as uploadDate,
+        HASHTAG as hashtag,
+        MODIFIED_DATE as modifiedDate,
+        STATUS as status,
+        HIT as hit
+        FROM POST
+        WHERE STATUS = 1
+        AND Post_ID = #{postId}
     </select>
 
 </mapper>

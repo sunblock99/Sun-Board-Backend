@@ -15,4 +15,6 @@ public interface BoardMapper {
     void updatePost(BoardDTO boardDTO);
 
     List<BoardDTO> getBoardList(RowBounds rowBounds);
+
+    BoardDTO seletePost(int postId);
 }

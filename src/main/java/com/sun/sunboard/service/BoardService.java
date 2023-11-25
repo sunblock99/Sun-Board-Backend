@@ -34,4 +34,9 @@ public class BoardService {
     public void modifyPost(BoardDTO boardDTO) {
         boardMapper.updatePost(boardDTO);
     }
+
+    public BoardDTO getBoard(int postId) {
+        BoardDTO board = boardMapper.seletePost(postId);
+        return board;
+    }
 }
