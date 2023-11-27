@@ -6,6 +6,8 @@ import com.sun.sunboard.mapper.BoardMapper;
 import com.sun.sunboard.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 public class BoardService {
     private final UserMapper userMapper;
     private final BoardMapper boardMapper;
-
+    private final RedisTemplate<String, String> redisTemplate;
     public  List<BoardDTO> getBoardList(PageDTO pageDTO) {
         RowBounds rowBounds = pageDTO.getRowBounds();
         return boardMapper.getBoardList(rowBounds);
@@ -38,5 +40,22 @@ public class BoardService {
     public BoardDTO getBoard(int postId) {
         BoardDTO board = boardMapper.seletePost(postId);
         return board;
+    }
+
+    public int incrementViewCount(int postId) {
+        String key = "postId:" + postId + ":views";
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        ops.increment(key);
+
+        int viewCount = this.getViewCount(postId);
+        if(viewCount % 100 == 0){
+            boardMapper.updateHit(postId,viewCount);
+        }
+        return viewCount;
+    }
+    public int getViewCount(int postId){
+        String key = "postId:" + postId + ":views";
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        return Integer.parseInt(ops.get(key));
     }
 }

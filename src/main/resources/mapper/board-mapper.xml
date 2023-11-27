@@ -68,4 +68,10 @@
         AND Post_ID = #{postId}
     </select>
 
+    <update id="updateHit">
+        UPDATE POST
+        SET HIT = #{hit}
+        WHERE POST_ID = #{postId}
+    </update>
+
 </mapper>

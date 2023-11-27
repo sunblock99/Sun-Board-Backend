@@ -97,7 +97,8 @@ public class BoardController {
     @GetMapping("/{postId}")
     public ResponseEntity<BoardDTO> detail(@PathVariable("postId") int postId) {
         BoardDTO board = boardService.getBoard(postId);
-
+        int hit = boardService.incrementViewCount(postId);
+        board.setHit(hit);
         return ResponseEntity.ok(board);
     }
 
