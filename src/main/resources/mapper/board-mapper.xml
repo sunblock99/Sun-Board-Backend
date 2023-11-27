@@ -74,4 +74,17 @@
         WHERE POST_ID = #{postId}
     </update>
 
+    <insert id="insertLike" >
+        INSERT INTO `LIKE`
+        (
+        `USER_NO`,
+        `POST_ID`
+        )
+        VALUES
+        (
+        #{userNo},
+        #{postId}
+        )
+    </insert>
+
 </mapper>

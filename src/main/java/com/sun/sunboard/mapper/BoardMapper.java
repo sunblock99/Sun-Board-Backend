@@ -20,4 +20,6 @@ public interface BoardMapper {
     BoardDTO seletePost(int postId);
 
     void updateHit(@Param("postId") int postId,@Param("hit") int viewCount);
+
+    void insertLike(@Param("postId")int postId,@Param("userNo") int userNo);
 }

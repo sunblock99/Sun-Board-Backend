@@ -102,5 +102,21 @@ public class BoardController {
         return ResponseEntity.ok(board);
     }
 
+    /**
+     * 게시글 좋아요 기능
+     *
+     * @return HTTP 200 상태코드와 함께 게시글 응답
+     */
+    @GetMapping("/like/{postId}")
+    public ResponseEntity<Void> like(@PathVariable("postId") int postId, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(userId == null || userId.isEmpty()){
+            throw new NullSessionException("세션이 만료되었습니다.");
+        }else {
+            boardService.addLike(postId,userId);
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
 }

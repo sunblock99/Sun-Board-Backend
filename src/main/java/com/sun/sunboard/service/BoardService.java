@@ -58,4 +58,9 @@ public class BoardService {
         ValueOperations<String, String> ops = redisTemplate.opsForValue();
         return Integer.parseInt(ops.get(key));
     }
+
+    public void addLike(int postId, String userId) {
+        int userNo = userMapper.findByUserNo(userId);
+        boardMapper.insertLike(postId,userNo);
+    }
 }
