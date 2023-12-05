@@ -7,13 +7,15 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserMapper {
 
-    public int checkDuplicatedId(String id);
+    int checkDuplicatedId(String id);
 
-    public void createUser(UserDTO user);
+    void createUser(UserDTO user);
 
     UserDTO findByUserId(UserDTO user);
 
     int checkDuplicatedIdPwd(@Param("id") String userId,@Param("password") String oldPassword);
 
     int updatePassword(@Param("id") String userId, @Param("password") String newPassword);
+
+    int findByUserNo(String userId);
 }

@@ -24,6 +24,13 @@
         id = #{id} AND password = #{password}
     </select>
 
+    <select id="findByUserNo" resultType="int">
+        SELECT USER_NO
+        FROM User
+        WHERE
+        status = 1 AND
+        id = #{id}
+    </select>
 
     <select id="checkDuplicatedId" resultType="int">
         SELECT COUNT(1)
@@ -34,7 +41,7 @@
     <select id="checkDuplicatedIdPwd" resultType="int">
         SELECT COUNT(1)
         FROM User
-        id = #{id} AND password = #{password}
+        WHERE id = #{id} AND password = #{password}
     </select>
 
     <insert id="createUser" parameterType="UserDTO">

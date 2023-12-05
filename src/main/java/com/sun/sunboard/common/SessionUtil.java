@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
          */
         public static String getLoginUserId(HttpSession session) {
             String userId = (String) session.getAttribute(LOGIN_USER_ID);
-            return userId == null ? "" : userId;
+            return userId == null ? null : userId;
         }
 
         /**
