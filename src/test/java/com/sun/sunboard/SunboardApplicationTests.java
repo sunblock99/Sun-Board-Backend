@@ -8,7 +8,7 @@ class SunboardApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("jenkinstest");
+		System.out.println("jenkinstest2");
 	}
 
 
