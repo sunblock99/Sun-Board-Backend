@@ -8,6 +8,8 @@ class SunboardApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("jenkinstest");
 	}
+
 
 }
