@@ -12,7 +12,8 @@ java {
 }
 
 jar {
-	enabled = false
+	enabled = true
+	archiveClassifier = ''
 }
 
 configurations {
