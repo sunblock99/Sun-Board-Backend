@@ -11,10 +11,6 @@ java {
 	sourceCompatibility = '11'
 }
 
-jar {
-	enabled = true
-	archiveClassifier = ''
-}
 
 configurations {
 	compileOnly {
