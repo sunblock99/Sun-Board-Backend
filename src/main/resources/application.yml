@@ -1,14 +1,14 @@
 server:
-  address: localhost
+  address: 52.5.255.36
   port: '8082'
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: sun
-    url: jdbc:mysql://localhost:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://52.2.255.36:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
     password: '1234'
   redis:
-    host: localhost
+    host: 52.5.255.36
     port: 6379
     password: 1234
 
