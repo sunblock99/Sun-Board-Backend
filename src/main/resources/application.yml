@@ -1,5 +1,5 @@
 server:
-  address: 52.5.255.36
+  address: 0.0.0.0
   port: '8082'
 spring:
   datasource:
@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://172.17.0.2:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
     password: '1234'
   redis:
-    host: 52.5.255.36
+    host: 0.0.0.0
     port: 6379
     password: 1234
 
