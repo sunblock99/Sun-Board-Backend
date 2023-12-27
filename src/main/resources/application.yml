@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: sun
-    url: jdbc:mysql://my_mysql_container:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://172.17.0.2:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
     password: '1234'
   redis:
     host: 52.5.255.36
