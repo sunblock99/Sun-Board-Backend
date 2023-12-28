@@ -8,6 +8,8 @@ public class SunboardApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SunboardApplication.class, args);
+
+
 	}
 
 }
