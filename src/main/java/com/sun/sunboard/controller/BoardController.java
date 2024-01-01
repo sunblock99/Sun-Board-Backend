@@ -2,6 +2,7 @@ package com.sun.sunboard.controller;
 
 import com.sun.sunboard.common.SessionUtil;
 import com.sun.sunboard.dto.BoardDTO;
+import com.sun.sunboard.dto.CommentDTO;
 import com.sun.sunboard.dto.PageDTO;
 import com.sun.sunboard.error.exception.NullSessionException;
 import com.sun.sunboard.service.BoardService;
@@ -118,5 +119,73 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     * 댓글 작성
+     *
+     * @param session 세션 정보
+     * @param commentDTO 댓글
+     * @return 생성 성공한 경우 HTTP 200 Created 상태코드와 함께 응답
+     */
+    @PostMapping("/write/comment")
+    public ResponseEntity<Void> commentWrite(@RequestBody CommentDTO commentDTO, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(userId == null || userId.isEmpty()){
+            throw new NullSessionException("세션이 만료되었습니다.");
+        }else{
+            boardService.addComment(commentDTO);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     * 댓글 수정
+     *
+     * @param session 세션 정보
+     * @param commentDTO 댓글
+     * @return 수정 성공한 경우 HTTP 200 상태코드와 함께 응답
+     */
+    @PutMapping("/modify/comment")
+    public ResponseEntity<Void> modifyComment(@RequestBody CommentDTO commentDTO, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(userId == null || userId.isEmpty()){
+            throw new NullSessionException("세션이 만료되었습니다.");
+        }else{
+            boardService.modifyComment(commentDTO);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     * 댓글 삭제
+     *
+     * @param session 세션 정보
+     * @param boardDTO 게시글
+     * @return 삭제 성공한 경우 HTTP 200 상태코드와 함께 응답
+     */
+    @DeleteMapping("/remove/comment/{commentId}")
+    public ResponseEntity<Void> removeComment(@PathVariable("commentId") int commentId, HttpSession session) {
+        String userId = SessionUtil.getLoginUserId(session);
+        if(userId == null || userId.isEmpty()){
+            throw new NullSessionException("세션이 만료되었습니다.");
+        }else{
+            boardService.removeComment(commentId);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     * 댓글 목록 조회
+     *
+     * @return HTTP 200 상태코드와 함께 목록 응답
+     */
+    @GetMapping("/list/comment/{postId}")
+    public ResponseEntity<List<CommentDTO>> listComment(@PathVariable("postId") int postId) {
+        List<CommentDTO> commentList = boardService.getCommentList(postId);
+
+        return ResponseEntity.ok(commentList);
+    }
 
 }

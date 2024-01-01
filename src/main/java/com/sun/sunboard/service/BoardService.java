@@ -1,6 +1,7 @@
 package com.sun.sunboard.service;
 
 import com.sun.sunboard.dto.BoardDTO;
+import com.sun.sunboard.dto.CommentDTO;
 import com.sun.sunboard.dto.PageDTO;
 import com.sun.sunboard.mapper.BoardMapper;
 import com.sun.sunboard.mapper.UserMapper;
@@ -62,5 +63,22 @@ public class BoardService {
     public void addLike(int postId, String userId) {
         int userNo = userMapper.findByUserNo(userId);
         boardMapper.insertLike(postId,userNo);
+    }
+
+    public void addComment(CommentDTO commentDTO) {
+        boardMapper.insertComment(commentDTO);
+    }
+
+    public void modifyComment(CommentDTO commentDTO) {
+        boardMapper.updateComment(commentDTO);
+    }
+
+    public void removeComment(int commentId) {
+        boardMapper.deleteComment(commentId);
+    }
+
+    public List<CommentDTO> getCommentList(int postId) {
+        List<CommentDTO> commentDTO = boardMapper.selectCommentList(postId);
+        return commentDTO;
     }
 }

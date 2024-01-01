@@ -87,4 +87,50 @@
         )
     </insert>
 
+
+    <insert id="insertComment" parameterType="CommentDTO">
+        INSERT INTO COMMENT
+        (
+        `USER_NO`,
+        `POST_ID`,
+        `CONTENT`,
+        `UPLOAD_DATE`,
+        `MODIFIED_DATE`,
+        `STATUS`)
+        VALUES
+        (
+        #{userNo},
+        #{postId},
+        #{content},
+        now(),
+        null,
+        '1');
+    </insert>
+
+    <update id="updateComment" parameterType="CommentDTO">
+        UPDATE COMMENT
+        SET CONTENT = #{content}, MODIFIED_DATE = now()
+        WHERE COMMENT_NO = #{commentId}
+    </update>
+
+    <update id="deleteComment">
+        UPDATE COMMENT
+        SET STATUS = 0
+        WHERE COMMENT_NO = #{commentId}
+    </update>
+
+
+    <select id="">
+        SELECT COMMENT_NO as commentId,
+              USER_NO as userNo,
+              POST_ID as postId,
+              CONTENT as content,
+              UPLOAD_DATE as uploadDate,
+              MODIFIED_DATE as modifiedDate,
+              STATUS as status
+        FROM COMMENT
+        WHERE POST_ID = #{postId} and STATUS = '1';
+
+    </select>
+
 </mapper>
