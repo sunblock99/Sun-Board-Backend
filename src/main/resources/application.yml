@@ -1,0 +1,20 @@
+server:
+  address: 0.0.0.0
+  port: '8082'
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sun
+    url: jdbc:mysql://172.17.0.2:3306/sunboard?serverTimezone=UTC&characterEncoding=UTF-8
+    password: '1234'
+  redis:
+    host: 0.0.0.0
+    port: 6379
+    password: 1234
+
+
+
+# mybatis 관련 설정
+mybatis:
+  # resources/mapper/ 에 있는 모든 xml 파일
+  mapper-locations: mapper/*.xml

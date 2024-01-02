@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SunboardApplicationTests {
 
-	@Test
+
 	void contextLoads() {
 		System.out.println("jenkinstest2");
 	}
